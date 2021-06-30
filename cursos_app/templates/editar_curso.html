@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+    
+{% block content %} 
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="col-6">
+                <h1>Curso {{ curso.id }}</h1>
+                <form action="{% url 'editar_curso' curso.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ curso.nombre }}">
+                    </div>
+                    <div class="mb-4">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" aria-label="With textarea" id="descripcion" name="descripcion">{{ curso.descripcion.det_descripcion }}</textarea>
+                    </div>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+                </form>
+            </div>
+            <div class="col-3">
+
+            </div>
+        </div>    
+{% endblock %}

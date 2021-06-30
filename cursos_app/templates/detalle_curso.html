@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+    
+{% block content %} 
+        <div class="row">
+            <div class="col-12">
+                <h3>Curso {{ curso.nombre }}</h3>
+                <p>Descripción: {{ curso.descripcion.det_descripcion }}</p>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-4">
+                <h3>Agregar Comentario</h3>
+                <form action="{% url 'nuevo_comentario' curso.id %}" method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre">
+                        </div>
+                        <div class="col">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido"> 
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="comentario" class="form-label">Comentario</label>
+                        <textarea class="form-control" aria-label="With textarea" id="comentario" name="comentario">
+
+                        </textarea>
+                    </div>
+                <button type="submit" class="btn btn-primary">Agregar</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="overflow-auto bg-transparent" style="max-height:250px;">
+                {% for comentario in comentarios %}    
+                    <h6>{{ comentario.nombre }} {{ comentario.apellido }},  {{comentario.updated_at }} </h6>
+                    <p>{{ comentario.det_comentario }}</p>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+{% endblock %}
